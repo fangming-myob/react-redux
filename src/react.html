@@ -10,16 +10,8 @@
 <body>
 <div id="app"></div>
 <script type="text/babel">
-    class GreetingHeader extends React.Component {
-        constructor(props) {
-            super(props);
-        }
-
-        render() {
-            return (
-                <div><h1>Hello {this.props.name}</h1></div>
-            )
-        }
+    function GreetingHeader(props) {
+        return <div><h1>Hello {props.name}</h1></div>
     }
 
     ReactDOM.render(<GreetingHeader name={'World'}/>, document.getElementById("app"))
