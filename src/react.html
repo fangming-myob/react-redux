@@ -10,16 +10,20 @@
 <body>
 <div id="app"></div>
 <script type="text/babel">
-    function GreetingHeader(props) {
-        return <h1>Hello {props.name}</h1>
-    }
+    const GreetingHeader = props => <h1>Hello {props.name}</h1>;
 
-    function GreetingDialog(props) {
-        return <div>
-            <GreetingHeader name={props.name}/>
-            <p>Welcome to the React lesson!</p>
-        </div>
-    }
+    const LessonList = () => <ul>
+        <li>Javascript</li>
+        <li>React JSX</li>
+        <li>React Component</li>
+    </ul>;
+
+    const GreetingDialog = props => <div>
+        <GreetingHeader name={props.name}/>
+        <p>Welcome to the React lesson!</p>
+        <p>Here is your tasks:</p>
+        <LessonList/>
+    </div>;
 
     ReactDOM.render(<GreetingDialog name={'World'}/>, document.getElementById("app"))
 </script>
