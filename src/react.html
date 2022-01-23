@@ -10,19 +10,19 @@
 <body>
 <div id="app"></div>
 <script type="text/babel">
+    const lessons = ['Javascript', 'React JSX', 'React Component'];
+
     const GreetingHeader = props => <h1>Hello {props.name}</h1>;
 
-    const LessonList = () => <ul>
-        <li>Javascript</li>
-        <li>React JSX</li>
-        <li>React Component</li>
-    </ul>;
+    const LessonList = (props) => <ul>{
+        props.list.map((item, index) => <li key={index}>{item}</li>)
+    }</ul>;
 
     const GreetingDialog = props => <div>
         <GreetingHeader name={props.name}/>
         <p>Welcome to the React lesson!</p>
-        <p>Here is your tasks:</p>
-        <LessonList/>
+        <p>Here is your lessons:</p>
+        <LessonList list={lessons}/>
     </div>;
 
     ReactDOM.render(<GreetingDialog name={'World'}/>, document.getElementById("app"))
