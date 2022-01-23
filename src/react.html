@@ -11,10 +11,17 @@
 <div id="app"></div>
 <script type="text/babel">
     function GreetingHeader(props) {
-        return <div><h1>Hello {props.name}</h1></div>
+        return <h1>Hello {props.name}</h1>
     }
 
-    ReactDOM.render(<GreetingHeader name={'World'}/>, document.getElementById("app"))
+    function GreetingDialog(props) {
+        return <div>
+            <GreetingHeader name={props.name}/>
+            <p>Welcome to the React lesson!</p>
+        </div>
+    }
+
+    ReactDOM.render(<GreetingDialog name={'World'}/>, document.getElementById("app"))
 </script>
 </body>
 </html>
