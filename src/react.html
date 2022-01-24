@@ -14,16 +14,27 @@
 
     const GreetingHeader = props => <h1>Hello {props.name}</h1>;
 
-    const LessonList = (props) => <ul>{
-        props.list.map((item, index) => <li key={index}>{item}</li>)
-    }</ul>;
+    const LessonList = (props) => {
 
-    const GreetingDialog = props => <div>
-        <GreetingHeader name={props.name}/>
-        <p>Welcome to the React lesson!</p>
-        <p>Here is your lessons:</p>
-        <LessonList list={lessons}/>
-    </div>;
+        const handleClick = (event) => {
+            const {onClick} = props
+            if (onClick) {
+                onClick(event.target.textContent);
+            }
+        }
+        return (<ul>{
+            props.list.map((item, index) => <li onClick={ (event) => handleClick(event)} key={index}>{item}</li>)
+        }</ul>);
+    }
+
+    const GreetingDialog = props => {
+        return (<div>
+            <GreetingHeader name={props.name}/>
+            <p>Welcome to the React lesson!</p>
+            <p>Here is your lessons:</p>
+            <LessonList onClick={(value) => console.log(value)} list={lessons}/>
+        </div>);
+    }
 
     ReactDOM.render(<GreetingDialog name={'World'}/>, document.getElementById("app"))
 </script>
