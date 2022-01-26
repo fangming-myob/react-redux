@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone@7.16.11/babel.min.js"></script>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+    const lessons = ['Javascript', 'React JSX', 'React Component'];
+
+    const GreetingHeader = props => <h1>Hello {props.name}</h1>;
+
+    const LessonList = (props) => {
+
+        const handleClick = (event) => {
+            const {onClick} = props
+            if (onClick) {
+                onClick(event.target.textContent);
+            }
+        }
+        return (<ul>{
+            props.list.map((item, index) => <li onClick={(event) => handleClick(event)} key={index}>{item}</li>)
+        }</ul>);
+    }
+
+    class AddLesson extends React.Component {
+        constructor() {
+            super();
+            this.state = {lesson: ''};
+        }
+
+        handleChange = (event) => {
+            this.setState({lesson: event.target.value});
+        };
+
+        handleAddLesson = () => {
+            console.log('current= ' + this.state.lesson)
+        }
+
+        render() {
+            return <div>
+                <input type="text" value={this.state.lesson} onChange={this.handleChange}></input>
+                <button onClick={this.handleAddLesson}>Add</button>
+            </div>;
+        }
+    }
+    // const AddLesson = () => {
+    //     const [lesson, setLesson] = React.useState('');
+    //
+    //     const handleChange = (event) => {
+    //         setLesson(event.target.value);
+    //     };
+    //
+    //     const handleAddLesson = () => {
+    //         console.log('current= ' + lesson)
+    //     }
+    //
+    //     return <div>
+    //         <input type="text" value={lesson} onChange={handleChange}></input>
+    //         <button onClick={handleAddLesson}>Add</button>
+    //     </div>;
+    // }
+
+    const GreetingDialog = props => {
+        return (<div>
+            <GreetingHeader name={props.name}/>
+            <p>Welcome to the React lesson!</p>
+            <p>Here is your lessons:</p>
+            <AddLesson/>
+            <LessonList onClick={(value) => console.log(value)} list={lessons}/>
+        </div>);
+    }
+
+    ReactDOM.render(<GreetingDialog name={'World'}/>, document.getElementById("app"))
+</script>
+</body>
+</html>
