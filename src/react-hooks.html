@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Hooks</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone@7.16.11/babel.min.js"></script>
+    <link rel="stylesheet" href="css/todo-list.css">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+
+    const TodoListHeader = () => <h1>To Do List</h1>
+    const TodoListInput = (props) => {
+        const addCustomizedTask = props.addCustomizedTask
+        const [task, setTask] = React.useState('');
+
+        const handleAddTask = () => {
+            addCustomizedTask(task);
+            setTask('');
+        };
+
+        const handleTaskChange = (event) => {
+            setTask(event.target.value);
+        };
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Enter') {
+                handleAddTask();
+            }
+        }
+
+        return (<div className="task-input">
+                <label>
+                    <input type="text" onKeyDown={handleKeyDown} placeholder='input your task' value={task}
+                           onChange={handleTaskChange}/>
+                </label>
+                <button onClick={handleAddTask} disabled={!task}>Add Task</button>
+            </div>
+        );
+    }
+
+    const TodoTasks = (props) => {
+        const taskItems = props.tasks.map((task) => <li key={task}>{task}</li>);
+        return <div className="task-item">
+            <ul>
+                {taskItems}
+            </ul>
+        </div>
+    };
+
+    const TodoList = () => {
+        const dailyTasks = ['Stand up', 'Tech huddle'];
+        const [tasks, setTasks] = React.useState(dailyTasks);
+        const addCustomizedTask = (task) => {
+            setTasks([...tasks, task])
+        }
+        return (<div className='todo-list'>
+            <TodoListHeader/>
+            <TodoListInput addCustomizedTask={addCustomizedTask}/>
+            <TodoTasks tasks={tasks}/>
+        </div>)
+    }
+
+    ReactDOM.render(<TodoList/>, document.getElementById('app'))
+
+</script>
+
+</body>
+</html>

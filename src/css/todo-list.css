@@ -1,0 +1,23 @@
+.todo-list {
+    margin: auto;
+    width: 400px;
+    background: linear-gradient(1turn, #e6e9d5, #4f9ee3);
+    padding: 10px;
+    text-align: center;
+}
+.task-input input{
+    font-size: 20px;
+    margin: auto;
+    padding: 5px;
+}
+.task-input button{
+    font-size: 20px;
+    margin: 20px;
+    padding: 5px;
+}
+.task-item li{
+    font-size: 20px;
+    font-family: "Arial";
+    text-align: left;
+}
+
